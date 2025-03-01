@@ -54,7 +54,7 @@ function a11yProps(index: number) {
   };
 }
 
-const OrdersPage: React.FC = () => {
+const MainPage: React.FC = () => {
   const queryClient = useQueryClient();
   const [tabValue, setTabValue] = useState(0);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -277,4 +277,4 @@ const OrdersPage: React.FC = () => {
   );
 };
 
-export default OrdersPage;
+export default MainPage;
