@@ -26,6 +26,7 @@ interface SidebarProps {
   drawerWidth: number;
   open: boolean;
   handleDrawerToggle: () => void;
+  toggleDrawer: (newOpen: boolean) => () => void;
 }
 
 const navItems: NavItem[] = [
@@ -53,7 +54,7 @@ const getIcon = (icon: string) => {
   }
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ drawerWidth, open, handleDrawerToggle }) => {
+const Sidebar: React.FC<SidebarProps> = ({ drawerWidth, open, handleDrawerToggle,toggleDrawer}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
@@ -74,21 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({ drawerWidth, open, handleDrawerToggle
 
   const drawerContent = (
     <>
-      <Toolbar>
-        {/* Logo or branding can go here */}
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box
-            component="img"
-            src="/logo.png"
-            alt="EC-Cat"
-            sx={{ height: 40, mr: 1, display: { xs: 'none', sm: 'block' } }}
-          />
-          <Box sx={{ typography: 'h6', fontWeight: 'bold', color: 'primary.main' }}>
-            EC-Cat
-          </Box>
-        </Box>
-      </Toolbar>
-      <Divider />
+
       <List>
         {navItems.map((item) => (
           <ListItem key={item.path} disablePadding>
@@ -139,12 +126,13 @@ const Sidebar: React.FC<SidebarProps> = ({ drawerWidth, open, handleDrawerToggle
       
       {/* Desktop permanent drawer */}
       <Drawer
-        variant="permanent"
+        open={open}
+        variant="temporary"
+        onClose={toggleDrawer}
         sx={{
           display: { xs: 'none', md: 'block' },
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
-        open
       >
         {drawerContent}
       </Drawer>

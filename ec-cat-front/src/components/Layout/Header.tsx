@@ -31,14 +31,41 @@ const Header: React.FC<HeaderProps> = ({ drawerWidth, open, handleDrawerToggle }
     <AppBar
       position="fixed"
       sx={{
-        width: { md: `calc(100% - ${drawerWidth}px)` },
+        width: { md: `calc(100%px)` },
         ml: { md: `${drawerWidth}px` },
         bgcolor: 'background.paper',
         color: 'text.primary',
         boxShadow: 1,
+        zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
     >
       <Toolbar>
+        {/* ハンバーガーメニュートグルボタン */}
+        <IconButton
+          color="inherit"
+          aria-label="toggle drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ mr: 2 }}
+        >
+          {open ? <MenuIcon /> : <MenuIcon />}
+        </IconButton>
+
+        <Toolbar>
+        {/* Logo or branding can go here */}
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box
+            component="img"
+            src="/logo.png"
+            alt="EC-Cat"
+            sx={{ height: 40, mr: 1, display: { xs: 'none', sm: 'block' } }}
+          />
+          <Box sx={{ typography: 'h6', fontWeight: 'bold', color: 'primary.main' }}>
+            EC-Cat
+          </Box>
+        </Box>
+        </Toolbar>
+        {/* タイトル */}
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -56,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ drawerWidth, open, handleDrawerToggle }
           </Typography>
         )}
 
-        {/* Search bar */}
+        {/* Search bar
         <Box
           sx={{
             position: 'relative',
@@ -83,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({ drawerWidth, open, handleDrawerToggle }
               width: '100%',
             }}
           />
-        </Box>
+        </Box> */}
 
         {/* Notifications */}
         <IconButton color="inherit" sx={{ ml: 1 }}>

@@ -38,10 +38,13 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleDrawerToggle = () => {
     setOpen(!open);
+  };
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
   };
 
   return (
@@ -58,8 +61,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       {/* Sidebar */}
       <Sidebar 
         drawerWidth={drawerWidth} 
-        open={open} 
+        open={open}
         handleDrawerToggle={handleDrawerToggle} 
+        toggleDrawer={toggleDrawer} 
       />
       
       {/* Main Content */}

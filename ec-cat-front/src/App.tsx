@@ -1,13 +1,12 @@
-// src/App.tsx
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 // レイアウト
 import MainLayout from './components/Layout/MainLayout';
-// 他のページもインポート
+// メインページ
 import MainPage from './pages/MainPage';
 
 // React Queryクライアントの作成
