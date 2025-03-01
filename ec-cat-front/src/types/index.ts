@@ -29,3 +29,10 @@ export interface NavItem {
   path: string;
   icon: string;
 }
+
+// サイドバー
+export interface SidebarItem { 
+    title: string;
+    icon: string;
+    children: NavItem[];
+}
