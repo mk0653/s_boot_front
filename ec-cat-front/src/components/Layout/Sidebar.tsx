@@ -24,6 +24,7 @@ import { NavItem } from '../../types';
 
 interface SidebarProps {
   drawerWidth: number;
+  drawerheight: string;
   open: boolean;
   handleDrawerToggle: () => void;
   toggleDrawer: (newOpen: boolean) => () => void;
@@ -54,7 +55,7 @@ const getIcon = (icon: string) => {
   }
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ drawerWidth, open, handleDrawerToggle,toggleDrawer}) => {
+const Sidebar: React.FC<SidebarProps> = ({ drawerWidth,drawerheight, open, handleDrawerToggle,toggleDrawer}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
@@ -75,7 +76,21 @@ const Sidebar: React.FC<SidebarProps> = ({ drawerWidth, open, handleDrawerToggle
 
   const drawerContent = (
     <>
-
+      <Toolbar>
+        {/* Logo or branding can go here */}
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box
+            component="img"
+            src="/logo.png"
+            alt="EC-Cat"
+            sx={{ height: 40, mr: 1, display: { xs: 'none', sm: 'block' } }}
+          />
+          <Box sx={{ typography: 'h6', fontWeight: 'bold', color: 'primary.main' }}>
+            EC-Cat
+          </Box>
+        </Box>
+      </Toolbar>
+      <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item.path} disablePadding>
@@ -107,7 +122,7 @@ const Sidebar: React.FC<SidebarProps> = ({ drawerWidth, open, handleDrawerToggle
   return (
     <Box
       component="nav"
-      sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+      sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 }, height: drawerheight}}
       aria-label="mailbox folders"
     >
       {/* Mobile drawer */}
@@ -118,7 +133,7 @@ const Sidebar: React.FC<SidebarProps> = ({ drawerWidth, open, handleDrawerToggle
         ModalProps={{ keepMounted: true }}
         sx={{
           display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth ,height: drawerheight},
         }}
       >
         {drawerContent}
@@ -127,11 +142,10 @@ const Sidebar: React.FC<SidebarProps> = ({ drawerWidth, open, handleDrawerToggle
       {/* Desktop permanent drawer */}
       <Drawer
         open={open}
-        variant="temporary"
-        onClose={toggleDrawer}
+        onClose={toggleDrawer(false)}
         sx={{
           display: { xs: 'none', md: 'block' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth , height: drawerheight},
         }}
       >
         {drawerContent}

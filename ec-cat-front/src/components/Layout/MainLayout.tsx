@@ -10,6 +10,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 
 const drawerWidth = 240;
+const drawerheight = "100vh";
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
@@ -38,7 +39,7 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -61,6 +62,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       {/* Sidebar */}
       <Sidebar 
         drawerWidth={drawerWidth} 
+        drawerheight={drawerheight}
         open={open}
         handleDrawerToggle={handleDrawerToggle} 
         toggleDrawer={toggleDrawer} 

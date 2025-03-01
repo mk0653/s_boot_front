@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ drawerWidth, open, handleDrawerToggle }
 
         <Toolbar>
         {/* Logo or branding can go here */}
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center',flexGrow: 1 }}>
           <Box
             component="img"
             src="/logo.png"
@@ -82,47 +82,20 @@ const Header: React.FC<HeaderProps> = ({ drawerWidth, open, handleDrawerToggle }
             EC-Cat
           </Typography>
         )}
+      
+        <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
+          {/* Notifications */}
+          <IconButton color="inherit" sx={{ ml: 1 }}>
+            <Badge badgeContent={4} color="error">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
 
-        {/* Search bar
-        <Box
-          sx={{
-            position: 'relative',
-            borderRadius: 1,
-            backgroundColor: (theme) => alpha(theme.palette.common.black, 0.05),
-            '&:hover': {
-              backgroundColor: (theme) => alpha(theme.palette.common.black, 0.1),
-            },
-            marginRight: 2,
-            marginLeft: 0,
-            width: { xs: '100%', sm: 'auto' },
-            display: { xs: 'none', sm: 'block' },
-            flexGrow: { sm: 1 },
-          }}
-        >
-          <Box sx={{ padding: '0 16px', height: '100%', position: 'absolute', display: 'flex', alignItems: 'center' }}>
-            <SearchIcon />
-          </Box>
-          <InputBase
-            placeholder="Search…"
-            sx={{
-              padding: 1,
-              paddingLeft: '48px',
-              width: '100%',
-            }}
-          />
-        </Box> */}
-
-        {/* Notifications */}
-        <IconButton color="inherit" sx={{ ml: 1 }}>
-          <Badge badgeContent={4} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-
-        {/* User avatar */}
-        <IconButton sx={{ ml: 1, p: 0 }}>
-          <Avatar alt="User" src="/static/images/avatar/1.jpg" />
-        </IconButton>
+          {/* User avatar */}
+          <IconButton sx={{ ml: 1, p: 0 }}>
+            <Avatar alt="User" src="/static/images/avatar/1.jpg" />
+          </IconButton>
+        </Box>
       </Toolbar>
     </AppBar>
   );
