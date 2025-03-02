@@ -5,18 +5,17 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  InputBase,
   Badge,
   Avatar,
   useMediaQuery,
   Theme,
-  alpha,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
-  Search as SearchIcon,
   Notifications as NotificationsIcon,
 } from '@mui/icons-material';
+import Lottie from 'react-lottie';
+import catAnimation from '../../assets/cat_walk.json';
 
 interface HeaderProps {
   drawerWidth: number;
@@ -26,17 +25,27 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ drawerWidth, open, handleDrawerToggle }) => {
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+    // Lottieアニメーションの設定
+    const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: catAnimation,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    };
 
   return (
     <AppBar
       position="fixed"
       sx={{
-        width: { md: `calc(100%px)` },
+        width: { md: `calc(100%)` },
         ml: { md: `${drawerWidth}px` },
         bgcolor: 'background.paper',
         color: 'text.primary',
         boxShadow: 1,
         zIndex: (theme) => theme.zIndex.drawer + 1,
+        overflow: 'hidden', 
       }}
     >
       <Toolbar>
@@ -48,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ drawerWidth, open, handleDrawerToggle }
           onClick={handleDrawerToggle}
           sx={{ mr: 2 }}
         >
-          {open ? <MenuIcon /> : <MenuIcon />}
+         <MenuIcon />
         </IconButton>
 
         <Toolbar>
@@ -95,6 +104,26 @@ const Header: React.FC<HeaderProps> = ({ drawerWidth, open, handleDrawerToggle }
           <IconButton sx={{ ml: 1, p: 0 }}>
             <Avatar alt="User" src="/static/images/avatar/1.jpg" />
           </IconButton>
+        </Box>
+
+        {/* 猫のLottieアニメーション */}
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: '1px',
+            left: 0,
+            width: '100%',
+            height: '50px',
+            pointerEvents: 'none', // クリックイベントが下の要素に通過するように
+            animation: 'catMove 40s linear infinite',
+            '& > div': { height: '100% !important' },
+            '@keyframes catMove': {
+              '0%': { transform: 'translateX(100vw)' },
+              '100%': { transform: 'translateX(-100%)' }
+            },
+          }}
+        >
+          <Lottie options={defaultOptions} height={40} width={80} />
         </Box>
       </Toolbar>
     </AppBar>
